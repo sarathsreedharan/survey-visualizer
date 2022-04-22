@@ -53,9 +53,9 @@ views:
     taxonomy:
       rows:
         start: 1
-        stop: 3
+        stop: 4
         exclude:
-        - 3
+        - 4
       columns:
         start: 5
         stop: 31
