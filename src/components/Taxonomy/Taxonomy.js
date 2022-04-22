@@ -72,7 +72,7 @@ class Taxonomy extends React.Component {
           title: '',
           draw_treemap: true,
           draw_circlemap: true,
-          level: 2,
+          level: 1,
           canvasZoom: {
             enabled: true,
           },
