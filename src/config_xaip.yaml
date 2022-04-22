@@ -58,7 +58,7 @@ views:
         - 3
       columns:
         start: 5
-        stop: 30
+        stop: 31
 - name: Affinity
   disabled: true
 - name: Network
