@@ -2,24 +2,17 @@
 metadata:
   acronym: XAIP
   title_text: 'The Landscape of XAIP'
-  citation_text: "@article{chakraborti2020emerging,
-  title={The emerging landscape of explainable ai planning and decision making},
-  author={Chakraborti, Tathagata and Sreedharan, Sarath and Kambhampati, Subbarao},
-  journal={arXiv preprint arXiv:2002.11697},
-  year={2020}
-}"
+  citation_text: "@inproceedings{chakraborti2020emerging,\n title={The Emerging Landscape of Explainable Automated Planning {\\&}\n\t Decision Making}, \n author={Chakraborti, Tathagata and Sreedharan, Sarath and Kambhampati, Subbarao}, \n booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on \n\t Artificial Intelligence, {IJCAI} 2020}, \n pages     = {4803--4811}, \n publisher = {ijcai.org}, \n year={2020}}"
   link_to_code: https://github.com/sarathsreedharan/survey-visualizer
   primary_link: https://arxiv.org/abs/2002.11697
   secondary_links: 
     - name: http://xaip.mybluemix.net/#/
   community_link: null
   info_tile: true
-  info_text: Learn more about the XAIP Workshop Series at ICAPS 20-present
+  info_text: Learn more about the
   info_link:
-  - link: https://arxiv.org/abs/2002.11697
-    text: How it started
-  - link: http://xaip.mybluemix.net/#/landscape
-    text: How it's going
+  - link: https://xaip.mybluemix.net/
+    text: [XAIP workshop series]
 default_view: Taxonomy
 min_year: 2000
 views:
