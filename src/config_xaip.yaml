@@ -5,7 +5,7 @@ metadata:
   citation_text: "@inproceedings{chakraborti2020emerging,\n title={The Emerging Landscape of Explainable Automated Planning {\\&}\n\t Decision Making}, \n author={Chakraborti, Tathagata and Sreedharan, Sarath and Kambhampati, Subbarao}, \n booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on \n\t Artificial Intelligence, {IJCAI} 2020}, \n pages     = {4803--4811}, \n publisher = {ijcai.org}, \n year={2020}}"
   link_to_code: https://github.com/sarathsreedharan/survey-visualizer
   primary_link: https://arxiv.org/abs/2002.11697
-  secondary_links: 
+  secondary_links:
     - name: http://xaip.mybluemix.net/#/
   community_link: null
   info_tile: true
@@ -26,32 +26,32 @@ views:
     disabled: false
     fancy_chart: false
     input_file:
-      filename: "./src/compiler/data/XAIP.xlsx"
-      active_worksheet: Classification
+      filename: "./src/compiler/data/XAIP_new.xlsx"
+      active_worksheet: Sheet1
     papers_list:
       shuffle_list: true
       key_map:
-        title: 3
+        title: 4
         abstract:
-        authors: 2
-        venue: 1
+        authors: 3
+        venue: 2
         sessions:
-        year: 0
+        year: 1
         keywords:
       rows:
         start: 4
-        stop: 79
+        stop: 80
         exclude:
-        - 79
+        - 80
     taxonomy:
       rows:
         start: 1
-        stop: 4
+        stop: 3
         exclude:
-        - 4
+        - []
       columns:
-        start: 5
-        stop: 31
+        start: 6
+        stop: 32
 - name: Affinity
   disabled: true
 - name: Network
