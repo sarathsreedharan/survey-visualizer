@@ -13,4 +13,7 @@ implies: Addresses Vocabulary Mismatch > Social
 implies: Abstraction > InfRec
 implies: HTN > Deterministic Planning
 atleastone: Deterministic Planning > OverSubscription Planning > Temporal/Numeric Planning > Stochastic Planning > Motion Planning > HTN > FOND > Partial Observability > Reinforcement Learning Setting
-
+atmostone: FOND > Deterministic Planning
+atmostone: FOND > HTN
+atmostone: FOND > Stochastic Planning
+atmostone: FOND > Partial Observability
