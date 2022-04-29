@@ -13,7 +13,4 @@ implies: Addresses Vocabulary Mismatch,Social
 implies: Abstraction,Inferential Reconciliation
 implies: HTN,Deterministic Dynamics
 atleastone: Deterministic Dynamics,OverSubscription Planning,Temporal/Numeric,Stochastic Dynamics,Motion Planning,HTN,FOND,Partial Observability,Reinforcement Learning
-atmostone: FOND,Deterministic Dynamics
-atmostone: FOND,HTN
-atmostone: FOND,Stochastic Dynamics
-atmostone: FOND,Partial Observability
+atmostone: Qualitative Non-Determinism,Deterministic Dynamics,Stochastic Dynamics
