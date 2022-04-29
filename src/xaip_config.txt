@@ -1,0 +1,15 @@
+; Custom constraints
+
+; Use the <type>:<description> pattern for custom constraints
+; <description> should be a comma-separated list of feature names
+; <type> can be one of:
+;   - atmostone
+;   - atleastone
+;   - oneof
+;   - implies
+
+implies: Model-rec > Social
+implies: Addresses Vocabulary Mismatch > Social
+implies: Abstraction > InfRec
+atleastone: Deterministic Planning > OverSubscription Planning > Temporal/Numeric Planning > Stochastic Planning > Motion Planning > HTN > FOND > Partial Observability > Reinforcement Learning Setting
+
