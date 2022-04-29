@@ -11,5 +11,6 @@
 implies: Model-rec > Social
 implies: Addresses Vocabulary Mismatch > Social
 implies: Abstraction > InfRec
+implies: HTN > Deterministic Planning
 atleastone: Deterministic Planning > OverSubscription Planning > Temporal/Numeric Planning > Stochastic Planning > Motion Planning > HTN > FOND > Partial Observability > Reinforcement Learning Setting
 
