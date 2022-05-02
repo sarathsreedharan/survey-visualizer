@@ -158,3 +158,11 @@ dmypy.json
 /src/compiler/data/*.json
 
 
+
+*.nnf
+
+src/compiler/analysis/macqvars.json
+
+*.vars
+
+src/compiler/analysis/macqvars-.json

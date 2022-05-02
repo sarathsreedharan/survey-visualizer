@@ -76,15 +76,17 @@ class LandingPage extends React.Component {
                   <Tile>
                     <p style={{ fontSize: 'small' }}>
                       {config['metadata']['info_text']}{' '}
-                      {config['metadata']['info_link'].map((link, id) => (
-                        <span key={id}>
-                          {' '}
-                          {id > 0 && '|'}{' '}
-                          <Link href={link.link} target="_blank">
-                            {link.text}
-                          </Link>
-                        </span>
-                      ))}
+                      <div style={{ paddingTop: '3px' }}>
+                        {config['metadata']['info_link'].map((link, id) => (
+                          <span key={id}>
+                            {' '}
+                            {id > 0 && '|'}{' '}
+                            <Link href={link.link} target="_blank">
+                              {link.text}
+                            </Link>
+                          </span>
+                        ))}
+                      </div>
                     </p>
                   </Tile>
                 )}
@@ -121,9 +123,7 @@ class LandingPage extends React.Component {
                     className="buttonset tertiary-secondary"
                     renderIcon={LogoGithub32}
                     size="small"
-                    href={
-                      config['metadata']['link_to_code'] + '#how-to-contribute'
-                    }
+                    href={config['metadata']['link_to_contribute']}
                     target="_blank">
                     Contribute
                   </Button>
@@ -145,7 +145,7 @@ class LandingPage extends React.Component {
                   {config['metadata']['secondary_links'].length > 1 && (
                     <div
                       className="bx--col-lg-8"
-                      style={{ padding: 0, margin: 0 }}>
+                      style={{ padding: 0, margin: 0, maxWidth: '12.25rem' }}>
                       <Accordion align="start">
                         <AccordionItem
                           className="see-also-accordion"
@@ -186,7 +186,12 @@ class LandingPage extends React.Component {
               </div>
 
               {!isMobile && (
-                <div className="footer">
+                <div
+                  className="footer bx--col-lg-4"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.9)',
+                    zIndex: '999',
+                  }}>
                   <div className="bx--row">
                     <div className="bx--col-lg-16">
                       <div className="bx--container">
@@ -196,7 +201,8 @@ class LandingPage extends React.Component {
                             marginBottom: '10px',
                             maxWidth: '75%',
                           }}>
-                          Follow us on GitHub. Your love keeps us going!{' '}
+                          Follow us on GitHub. Your love
+                          <br /> keeps us going!{' '}
                           <span role="img" aria-label="hugging face">
                             &#129303;
                           </span>
