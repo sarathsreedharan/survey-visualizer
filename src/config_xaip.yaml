@@ -1,0 +1,60 @@
+---
+metadata:
+  acronym: XAIP
+  title_text: 'The Landscape of XAIP'
+  citation_text: "@inproceedings{chakraborti2020emerging,\n title={The Emerging Landscape of Explainable Automated Planning {\\&}\n\t Decision Making}, \n author={Chakraborti, Tathagata and Sreedharan, Sarath and Kambhampati, Subbarao}, \n booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on \n\t Artificial Intelligence, {IJCAI} 2020}, \n pages     = {4803--4811}, \n publisher = {ijcai.org}, \n year={2020}}"
+  link_to_code: https://github.com/sarathsreedharan/survey-visualizer
+  primary_link: https://arxiv.org/abs/2002.11697
+  secondary_links:
+    - name: http://xaip.mybluemix.net/#/
+  community_link: null
+  info_tile: true
+  info_text: Learn more about the
+  info_link:
+  - link: https://xaip.mybluemix.net/
+    text: [XAIP workshop series]
+default_view: Taxonomy
+min_year: 2000
+views:
+- name: Taxonomy
+  disabled: false
+  default_tab: XAIP
+  tabs:
+  - tab_name: XAIP
+    title_text: Various works in XAIP
+    root_text: Design Element
+    disabled: false
+    fancy_chart: false
+    input_file:
+      filename: "./src/compiler/data/XAIP_new.xlsx"
+      active_worksheet: Sheet1
+    papers_list:
+      shuffle_list: true
+      key_map:
+        title: 4
+        abstract:
+        authors: 3
+        venue: 2
+        sessions:
+        year: 1
+        keywords:
+      rows:
+        start: 4
+        stop: 80
+        exclude:
+        - 80
+    taxonomy:
+      rows:
+        start: 1
+        stop: 3
+        exclude:
+        - []
+      columns:
+        start: 6
+        stop: 32
+- name: Affinity
+  disabled: true
+- name: Network
+  files_directory: "./src/compiler/pdfs"
+  match_threshold: 0.25
+  disabled: true

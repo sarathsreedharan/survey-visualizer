@@ -1,0 +1,16 @@
+; Custom constraints
+
+; Use the <type>:<description> pattern for custom constraints
+; <description> should be a comma-separated list of feature names
+; <type> can be one of:
+;   - atmostone
+;   - atleastone
+;   - oneof
+;   - implies
+
+implies: Model Reconciliation,Social
+implies: Addresses Vocabulary Mismatch,Social
+implies: Abstraction,Inferential Reconciliation
+implies: HTN,Deterministic Dynamics
+atleastone: Deterministic Dynamics,OverSubscription Planning,Temporal/Numeric,Stochastic Dynamics,Motion Planning,HTN,FOND,Partial Observability,Reinforcement Learning
+atmostone: Qualitative Non-Determinism,Deterministic Dynamics,Stochastic Dynamics
