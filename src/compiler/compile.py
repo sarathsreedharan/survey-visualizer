@@ -20,8 +20,9 @@ import csv
 import os
 import re
 
-__cache: Dict = {}
-__insights_file = "./src/components/Insights/data/new_paper.json"
+__cache: Dict = dict()
+__embeddings: List[Embedding] = list()
+
 
 def __text_transform(text: str) -> str:
     text = text.replace("\n", " ").replace("-", "").lower()
@@ -49,7 +50,6 @@ def getTaxonomy(config: Dict) -> List[Taxonomy]:
         return None
 
     global __cache
-
     out_data = list()
 
     for tab in config["tabs"]:
@@ -62,13 +62,17 @@ def getTaxonomy(config: Dict) -> List[Taxonomy]:
             taxonomy=list(),
         )
 
-        path = os.path.abspath(
-            os.path.join(
-                os.path.dirname(os.path.realpath(__file__)),
-                f"../../{tab['input_file']['filename']}",
+        path = tab["input_file"]["filename"]
+        if tab["input_file"].get("relative"):
+            path = os.path.abspath(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"./{path}")
             )
-        )
-        wb = load_workbook(path)
+        else:
+            path = os.path.abspath(path)
+
+        print(f"Looking for spreadshet at {path} ...")
+
+        wb = load_workbook(path, data_only=True)
         sheet = wb[tab["input_file"]["active_worksheet"]]
 
         row_number = 0
@@ -159,8 +163,13 @@ def getTaxonomy(config: Dict) -> List[Taxonomy]:
                     else:
                         new_paper[key] = None
 
-                tags = list()
+                if "year" in key_map:
+                    new_paper["year"] = int(new_paper["year"])
 
+                if "slug" not in key_map:
+                    new_paper["slug"] = f"paper-{new_id}"
+
+                tags = list()
                 for item in row:
                     if item.value:
 
@@ -199,22 +208,24 @@ def getAffinity(config: Dict, taxonomy: Taxonomy = __cache):
     if not taxonomy:
         taxonomy = __cache
 
+    global __embeddings
+
     new_paper_list = list()
     for paper in taxonomy["data"]:
         new_paper: Paper = copy.deepcopy(paper)
 
-        new_paper["abstract"] = paper["abstract"] or paper["title"]
+        new_paper["abstract"] = paper.get("abstract") or paper["title"]
         new_paper["authors"] = paper["authors"].replace(",", " | ")
 
-        new_paper["keywords"] = paper["keywords"] or " | ".join(
-            [tag["name"] for tag in paper["tags"]]
+        new_paper["keywords"] = paper.get("keywords") or " | ".join(
+            [tag["name"] for tag in paper.get("tags", [])]
         )
-        new_paper["sessions"] = paper["sessions"] or paper["venue"]
+        new_paper["sessions"] = paper.get("sessions") or paper.get("venue")
 
         new_paper_list.append(new_paper)
 
     # Referece: https://github.com/Mini-Conf/Mini-Conf/tree/master/scripts
-    print("Loading Transformer Model...")
+    print("Generating Embeddings...")
     model = SentenceTransformer("allenai-specter")
     papers = [
         "[SEP]".join(
@@ -234,8 +245,9 @@ def getAffinity(config: Dict, taxonomy: Taxonomy = __cache):
 
     out_data = []
     for i, row in enumerate(new_paper_list):
-        out_data.append({"id": row["UID"], "pos": transform[i].tolist()})
+        out_data.append({"UID": row["UID"], "pos": transform[i].tolist()})
 
+    __embeddings = out_data
     return out_data
 
 
@@ -249,12 +261,14 @@ def getNetwork(config: Dict, taxonomy: Taxonomy = __cache):
     for paper in taxonomy["data"]:
         network_data["nodes"].append(paper)
 
-    path = os.path.abspath(
-        os.path.join(
-            os.path.dirname(os.path.realpath(__file__)),
-            f"./../../{config['files_directory']}/",
+    path = config["files_directory"]["location"]
+
+    if config["files_directory"].get("relative"):
+        path = os.path.abspath(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"./{path}")
         )
-    )
+    else:
+        path = os.path.abspath(path)
 
     match_threshold = config["match_threshold"]
     columns_per_page = [2, 1]
@@ -266,6 +280,7 @@ def getNetwork(config: Dict, taxonomy: Taxonomy = __cache):
     y1 = 1  # Distance of top of character from bottom of page.
 
     files_to_read = glob.glob(f"{path}/*.pdf")
+    print(f"Looking for PDFs in {path} ...")
 
     for file in files_to_read:
         print(f"Parsing {files_to_read.index(file)+1}/{len(files_to_read)} papers...")
@@ -377,48 +392,12 @@ def getNetwork(config: Dict, taxonomy: Taxonomy = __cache):
 
     return network_data
 
+
 def getInsights(config: Dict, taxonomy: Taxonomy = __cache):
-
-    if not taxonomy:
-        taxonomy = __cache
-
-    with open(__insights_file) as f:
-        new_paper_data = json.loads(f.read())["key_map"]
-        new_tags = set()
-
-        for tag_train in new_paper_data:
-            new_tags = new_tags.union(tag_train.split(" > "))
-
-    new_paper = Paper(
-            UID = 0,
-            tags = [{"name": tag} for tag in new_tags]
-        )           
-
-    new_paper_list = copy.deepcopy(taxonomy["data"])
-    new_paper_list.append(new_paper)
-
-    # Referece: https://github.com/Mini-Conf/Mini-Conf/tree/master/scripts
-    print("Loading Transformer Model...")
-    model = SentenceTransformer("allenai-specter")
-    papers = [
-        "[SEP]".join(
-            [tag["name"] for tag in paper["tags"]]
-        )
-        for paper in new_paper_list
-    ]
-
-    embeddings = model.encode(papers, convert_to_tensor=True)
-
-    print("Generating Transforms...")
-    transform = sklearn.manifold.TSNE(n_components=2).fit_transform(
-        embeddings.cpu().numpy()
-    )
-
-    out_data = []
-    for i, row in enumerate(new_paper_list):
-        out_data.append({"id": row["UID"], "pos": transform[i].tolist()})
-
-    return out_data
+    if __embeddings:
+        return __embeddings
+    else:
+        return getAffinity(config, taxonomy)
 
 
 if __name__ == "__main__":
@@ -439,19 +418,31 @@ if __name__ == "__main__":
     )
     open(config_out, "w").write(json.dumps(config, indent=4))
 
+    config_out_to_build = os.path.abspath(
+        os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), f"./../../public/config.json"
+        )
+    )
+
+    open(config_out_to_build, "w").write(
+        json.dumps({"name": config["metadata"]["name"]}, indent=4)
+    )
+
     for view in config["views"]:
-        if not view["disabled"]:
-
-            view_name = view["name"]
-            out_file = os.path.abspath(
-                os.path.join(
-                    os.path.dirname(os.path.realpath(__file__)),
-                    f"./data/{view_name}.json",
-                )
+        view_name = view["name"]
+        out_file = os.path.abspath(
+            os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                f"./data/{view_name}.json",
             )
+        )
 
+        if not view["disabled"]:
             print(f"Generating {view_name} view...")
             output = eval(f"get{view_name}({view})")
 
-            print(f"Writing {out_file}...")
-            open(out_file, "w").write(json.dumps(output, indent=4))
+        else:
+            output = __cache
+
+        print(f"Writing {out_file}...")
+        open(out_file, "w").write(json.dumps(output, indent=4))
