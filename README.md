@@ -1,4 +1,4 @@
-# Survey Visualizer (XAIP Fork)
+# Survey Visualizer
 
 [![Carbon](https://img.shields.io/badge/design-carbon-blue)](https://www.carbondesignsystem.com/)
 
