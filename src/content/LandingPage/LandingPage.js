@@ -75,19 +75,20 @@ class LandingPage extends React.Component {
                 {config['metadata']['info_tile'] && (
                   <Tile>
                     <p style={{ fontSize: 'small' }}>
-                      {config['metadata']['info_text']}{' '}
-                      <div style={{ paddingTop: '3px' }}>
-                        {config['metadata']['info_link'].map((link, id) => (
-                          <span key={id}>
-                            {' '}
-                            {id > 0 && '|'}{' '}
-                            <Link href={link.link} target="_blank">
-                              {link.text}
-                            </Link>
-                          </span>
-                        ))}
-                      </div>
+                      {config['metadata']['info_text']}
                     </p>
+
+                    <div style={{ paddingTop: '3px' }}>
+                      {config['metadata']['info_link'].map((link, id) => (
+                        <span key={id}>
+                          {' '}
+                          {id > 0 && '|'}{' '}
+                          <Link href={link.link} target="_blank">
+                            {link.text}
+                          </Link>
+                        </span>
+                      ))}
+                    </div>
                   </Tile>
                 )}
 

@@ -1,6 +1,0 @@
-applications:
-- name: toby-backend
-  memory: 1G
-  path: .
-  buildpacks: 
-    - python_buildpack

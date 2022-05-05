@@ -767,7 +767,7 @@ class Insights extends React.Component {
                       if (
                         idx >= (this.state.pageID - 1) * this.state.pageMAX &&
                         idx < this.state.pageID * this.state.pageMAX
-                      )
+                      ) {
                         return (
                           <Insight
                             key={idx}
@@ -775,6 +775,9 @@ class Insights extends React.Component {
                             data={this.state.new_papers[idx]}
                           />
                         );
+                      } else {
+                        return null;
+                      }
                     }
                   )}
                 </div>

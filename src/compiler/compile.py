@@ -62,7 +62,16 @@ def getTaxonomy(config: Dict) -> List[Taxonomy]:
             taxonomy=list(),
         )
 
-        path = os.path.abspath(tab["input_file"]["filename"])
+        path = tab["input_file"]["filename"]
+        if tab["input_file"].get("relative"):
+            path = os.path.abspath(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"./{path}")
+            )
+        else:
+            path = os.path.abspath(path)
+
+        print(f"Looking for spreadshet at {path} ...")
+
         wb = load_workbook(path, data_only=True)
         sheet = wb[tab["input_file"]["active_worksheet"]]
 
@@ -216,7 +225,7 @@ def getAffinity(config: Dict, taxonomy: Taxonomy = __cache):
         new_paper_list.append(new_paper)
 
     # Referece: https://github.com/Mini-Conf/Mini-Conf/tree/master/scripts
-    print("Loading Transformer Model...")
+    print("Generating Embeddings...")
     model = SentenceTransformer("allenai-specter")
     papers = [
         "[SEP]".join(
@@ -252,7 +261,15 @@ def getNetwork(config: Dict, taxonomy: Taxonomy = __cache):
     for paper in taxonomy["data"]:
         network_data["nodes"].append(paper)
 
-    path = os.path.abspath(config["files_directory"])
+    path = config["files_directory"]["location"]
+
+    if config["files_directory"].get("relative"):
+        path = os.path.abspath(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"./{path}")
+        )
+    else:
+        path = os.path.abspath(path)
+
     match_threshold = config["match_threshold"]
     columns_per_page = [2, 1]
 
@@ -263,6 +280,7 @@ def getNetwork(config: Dict, taxonomy: Taxonomy = __cache):
     y1 = 1  # Distance of top of character from bottom of page.
 
     files_to_read = glob.glob(f"{path}/*.pdf")
+    print(f"Looking for PDFs in {path} ...")
 
     for file in files_to_read:
         print(f"Parsing {files_to_read.index(file)+1}/{len(files_to_read)} papers...")
@@ -399,6 +417,16 @@ if __name__ == "__main__":
         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"./../config.json")
     )
     open(config_out, "w").write(json.dumps(config, indent=4))
+
+    config_out_to_build = os.path.abspath(
+        os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), f"./../../public/config.json"
+        )
+    )
+
+    open(config_out_to_build, "w").write(
+        json.dumps({"name": config["metadata"]["name"]}, indent=4)
+    )
 
     for view in config["views"]:
         view_name = view["name"]

@@ -42,10 +42,24 @@ You can contribute in two forms:
 
 ### Active Deployments
 
-| Topic | Link | Contribute | Community |
-| :----- | :----- | :----- | :----- |
-| Virtual, Augmented, and Mixed-Reality for <br/> Human-Robot Interaction [`paper`](https://arxiv.org/abs/2202.11249) [`paper`](https://ieeexplore.ieee.org/document/8673071) | [vamhri.com](http://ibm.biz/vam-hri) | [Contribute](https://github.com/miwalker/survey-visualizer/issues/new/choose) | [Slack](https://join.slack.com/t/vam-hri/shared_invite/zt-gjq1jtld-PzxfFywTi0qBF6CUX5julw)  |
-| Explainable AI Planning [`paper`](https://www.ijcai.org/Proceedings/2020/669) [`paper`](https://ojs.aaai.org//index.php/ICAPS/article/view/3463) | [explainableplanning.com](http://ibm.biz/xaipviz) | [Contribute](https://github.com/sarathsreedharan/survey-visualizer/issues/new/choose) | [Slack](https://join.slack.com/t/xaip2021/shared_invite/zt-svdiylde-EwqOBkguynR6jKbi_UKDXA) |
-| Model Acquisition for Planning [`paper`](https://drive.google.com/file/d/1WqO-PWbE7uhHVbSRnqGcJkQN2-Hpquh2/view?usp=sharing) | [macq.planning.domains](http://ibm.biz/macqviz) | [Contribute](https://github.com/QuMuLab/macq) | [Slack](https://join.slack.com/t/theplanningcommunity/shared_invite/enQtNjg0MTIzNTE3MTY4LTQ4YTRiNjhjNmVlNmEwMGMxOTQwNTZlYWM2YTk1YjdkZmIyMTU5MzRjZjYzOWYxMjJkNGM3YTM2MWI0MmM2MGY) |
+| Topic                                                                                                                                                                       | Link                                              | Contribute                                                                            | Community                                                                                                                                                                        |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Virtual, Augmented, and Mixed-Reality for <br/> Human-Robot Interaction [`paper`](https://arxiv.org/abs/2202.11249) [`paper`](https://ieeexplore.ieee.org/document/8673071) | [vamhri.com](http://ibm.biz/vam-hri)              | [Contribute](https://github.com/miwalker/survey-visualizer/issues/new/choose)         | [Slack](https://join.slack.com/t/vam-hri/shared_invite/zt-gjq1jtld-PzxfFywTi0qBF6CUX5julw)                                                                                       |
+| Explainable AI Planning [`paper`](https://www.ijcai.org/Proceedings/2020/669) [`paper`](https://ojs.aaai.org//index.php/ICAPS/article/view/3463)                            | [explainableplanning.com](http://ibm.biz/xaipviz) | [Contribute](https://github.com/sarathsreedharan/survey-visualizer/issues/new/choose) | [Slack](https://join.slack.com/t/xaip2021/shared_invite/zt-svdiylde-EwqOBkguynR6jKbi_UKDXA)                                                                                      |
+| Model Acquisition for Planning [`paper`](https://drive.google.com/file/d/1WqO-PWbE7uhHVbSRnqGcJkQN2-Hpquh2/view?usp=sharing)                                                | [macq.planning.domains](http://ibm.biz/macqviz)   | [Contribute](https://github.com/QuMuLab/macq)                                         | [Slack](https://join.slack.com/t/theplanningcommunity/shared_invite/enQtNjg0MTIzNTE3MTY4LTQ4YTRiNjhjNmVlNmEwMGMxOTQwNTZlYWM2YTk1YjdkZmIyMTU5MzRjZjYzOWYxMjJkNGM3YTM2MWI0MmM2MGY) |
 
+<!--
+## How to Cite
 
+[`download paper`](https://drive.google.com/file/d/1-14v3IwVdNSau6r3_fkU24Rj7qjWWh-1/view?usp=sharing)
+
+If you end up using this work, please remember to cite us as follows:
+
+```
+@inproceedings{toby,
+ title={{TOBY: A tool for exploration of data from academic survey papers}},
+ author={Tathagata Chakraborti and Jungkoo Kang and Christian Muise and Sarath Sreedhatan and Michael Walker and Daniel Szafir and Tom Williams},
+ booktitle={Technical Report},
+ year={2022}}
+```
+ -->
