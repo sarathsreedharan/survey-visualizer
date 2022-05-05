@@ -463,7 +463,7 @@ class Insights extends React.Component {
   changeNumePapers = e => {
     this.setState({
       ...this.state,
-      num_papers: e.imaginaryTarget.value,
+      num_papers: parseInt(e.imaginaryTarget.value),
     });
   };
 
@@ -675,25 +675,23 @@ class Insights extends React.Component {
               )}
 
               <div className="bx--row">
-                {view_config.interactive && (
-                  <div className="bx--col-lg-4">
-                    <NumberInput
-                      helperText={
-                        <>
-                          <span style={{ color: 'red' }}>Optional</span> Number
-                          of papers
-                        </>
-                      }
-                      id="num-papers"
-                      invalidText="Number is not valid"
-                      max={maxImagination}
-                      min={1}
-                      step={1}
-                      value={this.state.num_papers}
-                      onChange={this.changeNumePapers.bind(this)}
-                    />
-                  </div>
-                )}
+                <div className="bx--col-lg-4">
+                  <NumberInput
+                    helperText={
+                      <>
+                        <span style={{ color: 'red' }}>Optional</span> Number of
+                        papers
+                      </>
+                    }
+                    id="num-papers"
+                    invalidText="Number is not valid"
+                    max={maxImagination}
+                    min={1}
+                    step={1}
+                    value={this.state.num_papers}
+                    onChange={this.changeNumePapers.bind(this)}
+                  />
+                </div>
                 <div className="bx--col-lg-4">
                   <Button
                     kind="primary"
